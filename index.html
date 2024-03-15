@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Balls</title>
+  <script src="balls.js"></script>
+</head>
+
+<body>
+  <canvas id="canvasBalls" width="800" height="600" style="border:1px solid #000000;"></canvas>
+  <br>
+  <div>Гравитация:
+
+    <input type="range" id="slider_01" style="width: 150px;"
+      oninput="app.setSlider_01(this.value); document.getElementById('text_01').value = this.value;">
+    mg =
+    <input id="text_01" style="width: 5ex;" required pattern="[-+]?([0-9]*\.[0-9]+|[0-9]+)" oninput="
+            
+            // если введено не число - строка не пройдет валидацию по паттерну выше, и checkValidity() вернет false
+            
+            if (!this.checkValidity()) return;
+            app.setSlider_01(this.value);
+            document.getElementById('slider_01').value = this.value;
+        ">
+    ⋅ m ⋅ g0
+  </div><br>
+
+  <div>Сколько шаров помещается по вертикали:
+    <input type="button" style="width: 30px" name="" onclick="app.setNy(3); app.newSystem();return false;" value="3" />
+    <input type="button" style="width: 30px" name="" onclick="app.setNy(4); app.newSystem();return false;" value="4" />
+    <input type="button" style="width: 30px" name="" onclick="app.setNy(5); app.newSystem();return false;" value="5" />
+    <input type="button" style="width: 30px" name="" onclick="app.setNy(7); app.newSystem();return false;" value="7" />
+    &nbsp; <!--знак пробела-->
+    <input type="button" style="width: 30px" name="" onclick="app.setNy(9); app.newSystem();return false;" value="9" />
+    <input type="button" style="width: 30px" name="" onclick="app.setNy(12); app.newSystem();return false;"
+      value="12" />
+    <input type="button" style="width: 30px" name="" onclick="app.setNy(15); app.newSystem();return false;"
+      value="15" />
+  </div><br>
+
+  <div>Конфигурация:
+    <input type="button" name="" onclick="app.setTriangularLattice(); return false;" value="Треугольная решетка" />
+    <input type="button" name="" onclick="app.setRandom(); return false;" value="Как попало" />
+    <input type="button" name="" onclick="app.setEmpty(); return false;" value="Пустое поле" />
+  </div><br>
+
+  <div>
+    <input type="checkbox" id="checkbox_01" name="" onchange="app.setCheckbox_01(this.checked);" />
+    <a href="/SLJ" title="SLJ" class="mw-redirect">Short Lennard-Jones</a> potential
+  </div><br>
+
+  <div>
+    <input type="checkbox" id="checkbox_02" name="" onchange="app.setCheckbox_02(this.checked);" />
+    Термостат:
+    <input type="range" id="slider_02" style="width: 150px;"
+    
+      oninput="app.setSlider_02(this.value); document.getElementById('text_02').value = this.value;">
+    T ⋅ T0 = <input id="text_02" style="width: 5ex;" required pattern="[-+]?([0-9]*\.[0-9]+|[0-9]+)" oninput="
+            // если введено не число - строка не пройдет валидацию по паттерну выше, и checkValidity() вернет false
+            if (!this.checkValidity()) return;
+            app.setSlider_02(this.value);
+            document.getElementById('slider_02').value = this.value;
+        ">
+    <br>
+    <input type="checkbox" checked id="checkbox_03" name="" onchange="app.setCheckbox_03(this.checked);" />Разгон
+    случайными скоростями
+    <br>
+    Термостат действует на:
+    <input type="checkbox" checked id="checkbox_04" name="" onchange="app.setCheckbox_04(this.checked);" />Внешнее
+    трение
+    <input type="checkbox" checked id="checkbox_05" name="" onchange="app.setCheckbox_05(this.checked);" />Внутреннее
+    трение
+    <div>T ≈ <span id="Temperature"></span></div>
+  </div><br>
+
+  <div>Количество частиц: <span id="ballsNum"></span></div>
+
+  <script type="text/javascript">var app = new MainBalls(
+      document.getElementById('canvasBalls'),
+      document.getElementById('slider_01'),
+      document.getElementById('text_01'),
+      document.getElementById('slider_02'),
+      document.getElementById('text_02')
+    );</script>
+</body>
+
+</html>
